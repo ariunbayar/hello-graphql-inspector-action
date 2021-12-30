@@ -14,6 +14,3 @@ jobs:
       - uses: kamilkisiela/graphql-inspector@master
         with:
           schema: 'master:myschema.graphql'
-
-    notifications:
-      slack: https://hooks.slack.com/services/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

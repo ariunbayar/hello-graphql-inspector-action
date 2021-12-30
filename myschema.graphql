@@ -1,3 +1,9 @@
 enum Currencies {
 	USD
 }
+
+
+type Money {
+	amount: Int
+	currency: Currencies
+}

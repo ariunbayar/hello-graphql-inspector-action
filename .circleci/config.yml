@@ -39,7 +39,6 @@ jobs:
         uses: actions/checkout@master
 
       - name: GraphQL Inspector
-        uses: kamilkisiela/graphql-inspector@master
+        uses: kamilkisiela/graphql-inspector@v3.0.2
         with:
             schema: 'master:myschema.graphql'
-

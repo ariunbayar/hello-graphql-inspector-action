@@ -4,6 +4,7 @@ enum Currencies {
 
 
 type Money {
+	amount: Int @deprecated(reason: "Use cents instead")
 	cents: Int
 	currency: Currencies
 }

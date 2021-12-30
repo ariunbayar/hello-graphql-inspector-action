@@ -1,42 +1,27 @@
 version: 2
 
 jobs:
-#  build:
-#    docker:
-#      - image: circleci/python:3.7
-#    steps:
-#      - checkout
-#      - restore_cache:
-#          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-#      - run:
-#          command: |
-#            python3 -m venv venv
-#            . venv/bin/activate
-#            pip install -r requirements.txt
-#      - save_cache:
-#          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
-#          paths:
-#            - "venv"
-#      - run:
-#          name: Running tests
-#          command: |
-#            . venv/bin/activate
-#            make test
-#      - store_artifacts:
-#          path: test-reports/
-#          destination: .
-
-  graphql_inspector:
-
-    name: Check Schema
-    runs-on: ubuntu-latest
-
+  build:
+    docker:
+      - image: circleci/python:3.7
     steps:
-
-      - name: Checkout
-        uses: actions/checkout@master
-
-      - name: GraphQL Inspector
-        uses: kamilkisiela/graphql-inspector@v3.0.2
-        with:
-            schema: 'master:myschema.graphql'
+      - checkout
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run:
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
+      - run:
+          name: Running tests
+          command: |
+            . venv/bin/activate
+            make test
+      - store_artifacts:
+          path: test-reports/
+          destination: .

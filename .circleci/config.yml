@@ -1,4 +1,7 @@
 version: 2
+
+on: [push]
+
 jobs:
   build:
     docker:
@@ -24,3 +27,18 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: .
+
+  graphql-inspector:
+
+    name: Check Schema
+
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - uses: kamilkisiela/graphql-inspector@master
+        with:
+            schema: 'master:myschema.graphql'
+

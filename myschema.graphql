@@ -4,6 +4,6 @@ enum Currencies {
 
 
 type Money {
-	cents: Int
+	amount: Int
 	currency: Currencies
 }

@@ -15,4 +15,5 @@ type Query {
 type Categories {
   name: String!
   description: String
+  thumbnail: String
 }

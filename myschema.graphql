@@ -3,6 +3,12 @@ enum Currencies {
 }
 
 
+enum SomeStatus {
+  ON_HOLD
+  PROGRESS
+}
+
+
 type Money {
 	cents: Int
 	currency: Currencies

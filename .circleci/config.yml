@@ -33,6 +33,7 @@ jobs:
       - checkout
       - run:
             command: |
+              yarn global add @graphql-inspector/diff-command
               yarn global add @graphql-inspector/graphql-loader @graphql-inspector/git-loader
       - run:
           name: GraphQL Inspector

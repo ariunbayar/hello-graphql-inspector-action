@@ -8,7 +8,7 @@ type Money {
 	currency: Currencies
 }
 
-query MyQueries {
+type Query {
   getCategories(parent_id: Int!): [Categories]
 }
 

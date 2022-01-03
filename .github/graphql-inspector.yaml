@@ -3,7 +3,6 @@ schema: 'myschema.graphql'
 notifications:
   slack: ${{ secrets.GRAPHQL_SLACK_WEBHOOK }}
 
-# Customizing Schema Diff
 diff:
-  # Pull Request annotations (enabled by default)
   annotations: false
+  failOnBreaking: false

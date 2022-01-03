@@ -15,6 +15,7 @@ type User {
   firstname: String!
   lastname: String
   picture: String
+  text1: String
 }
 
 

@@ -7,3 +7,12 @@ type Money {
 	cents: Int
 	currency: Currencies
 }
+
+query MyQueries {
+  getCategories(parent_id: Int!): [Categories]
+}
+
+type Categories {
+  name: String!
+  description: String
+}

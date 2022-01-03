@@ -13,6 +13,7 @@ enum SomeStatus {
 
 type User {
   firstname: String!
+  lastname: String
 }
 
 

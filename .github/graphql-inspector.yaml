@@ -1,3 +1,10 @@
+env:
+  Development:
+    branch: 'master'
+    schema: 'myschema.graphql'
+    notifications:
+      slack: ${{ secrets.GRAPHQL_SLACK_WEBHOOK }}
+
 branch: 'master'
 schema: 'myschema.graphql'
 notifications:

@@ -18,6 +18,7 @@ type User {
   text1: String
   text2: String
   text3: String
+  text4: String
 }
 
 

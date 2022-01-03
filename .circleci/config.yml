@@ -34,3 +34,10 @@ jobs:
       - run:
           name: GraphQL Inspector
           command: 'graphql-inspector diff "git:origin/master:./myschema.graphql" "myschema.graphql"'
+
+workflows:
+  version: 2
+  run-all-jobs:
+    jobs:
+      - build
+      - graphql-inspector

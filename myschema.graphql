@@ -11,6 +11,10 @@ enum SomeStatus {
   ALL
 }
 
+type User {
+  firstname: String!
+}
+
 
 type Money {
 	cents: Int

@@ -19,6 +19,7 @@ type User {
   text2: String
   text3: String
   text4: String
+  text5: String
 }
 
 

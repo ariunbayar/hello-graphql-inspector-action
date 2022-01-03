@@ -1,7 +1,7 @@
 branch: 'master'
 schema: 'myschema.graphql'
 notifications:
-  slack: https://hooks.slack.com/services/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
+  slack: https://eni9lb87ctab211.m.pipedream.net
 
 diff:
   annotations: false

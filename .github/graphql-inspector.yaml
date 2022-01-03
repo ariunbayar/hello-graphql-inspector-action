@@ -5,6 +5,9 @@ env:
     notifications:
       slack: https://hooks.slack.com/services/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
 
+branch: 'master'
+schema: 'myschema.graphql'
+
 diff:
   annotations: false
   failOnBreaking: false

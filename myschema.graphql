@@ -4,7 +4,15 @@ enum Currencies {
 
 
 type Money {
-	amount: Int @deprecated(reason: "Use cents instead")
 	cents: Int
 	currency: Currencies
+}
+
+type Query {
+  getCategories(parent_id: Int!): [Categories]
+}
+
+type Categories {
+  name: String!
+  description: String
 }

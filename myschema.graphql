@@ -8,6 +8,7 @@ enum SomeStatus {
   PROGRESS
   SUCCESS
   FAIL
+  ALL
 }
 
 

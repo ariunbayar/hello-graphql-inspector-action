@@ -6,6 +6,7 @@ enum Currencies {
 enum SomeStatus {
   ON_HOLD
   PROGRESS
+  SUCCESS
 }
 
 

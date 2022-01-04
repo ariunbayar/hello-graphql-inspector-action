@@ -20,6 +20,7 @@ type User {
   text3: String
   text4: String
   text5: String @deprecated(reason: "Not used anymore")
+  text6: String
 }
 
 

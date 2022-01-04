@@ -2,6 +2,7 @@ enum Currencies {
 	USD
 	EUR
 	GBP
+	INR
 }
 
 

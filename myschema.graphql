@@ -21,7 +21,6 @@ type User {
   text4: String
   text5: String @deprecated(reason: "Not used anymore")
   text6: String
-  text7: String
 }
 
 

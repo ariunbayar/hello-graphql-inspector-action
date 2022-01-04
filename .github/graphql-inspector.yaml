@@ -1,14 +1,8 @@
 branch: 'master'
 schema: 'myschema.graphql'
 notifications:
-  slack: ${{ secrets.GRAPHQL_SLACK_WEBHOOK }}
+  slack: https://hooks.slack.com/services/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
 
-
-env:
-  dev:
-    branch: 'master'
-    notifications:
-      slack: ${{ secrets.GRAPHQL_SLACK_WEBHOOK }}
 
 diff:
   annotations: false

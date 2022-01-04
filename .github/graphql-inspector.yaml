@@ -1,5 +1,7 @@
 branch: 'master'
 schema: 'myschema.graphql'
+notifications:
+  slack: ${{ secrets.GRAPHQL_SLACK_WEBHOOK }}
 
 
 env:

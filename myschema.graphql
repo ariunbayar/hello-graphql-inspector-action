@@ -1,5 +1,7 @@
 enum Currencies {
 	USD
+	EUR
+	GBP
 }
 
 
@@ -24,7 +26,6 @@ type User {
   text7: String
   text8: String
 }
-
 
 type Money {
 	cents: Int

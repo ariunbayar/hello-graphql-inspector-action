@@ -34,6 +34,7 @@ jobs:
       - run:
           name: GraphQL Inspector
           command: |
+              yarn global add graphql@^15.0.0
               yarn global add @graphql-inspector/config@2.3.0
               yarn global add @graphql-tools/utils@^7.0.0
               yarn global add @graphql-inspector/loaders@3.0.2
@@ -41,7 +42,6 @@ jobs:
               yarn global add @graphql-inspector/diff-command
               yarn global add @graphql-inspector/graphql-loader
               yarn global add @graphql-inspector/git-loader
-              yarn global add graphql@^15.0.0
               graphql-inspector diff "git:origin/master:./myschema.graphql" "myschema.graphql"
 
 workflows:

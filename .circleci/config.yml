@@ -25,3 +25,13 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: .
+
+  graphql-inspector:
+    docker:
+      - image: kamilkisiela/graphql-inspector
+    steps:
+      - checkout
+      - run:
+          name: GraphQL Inspector
+          command: |
+              graphql-inspector diff "git:origin/master:./myschema.graphql" "myschema.graphql"

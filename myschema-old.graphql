@@ -1,0 +1,43 @@
+enum Currencies {
+	USD
+	EUR
+	INR
+}
+
+
+enum SomeStatus {
+  ON_HOLD
+  PROGRESS
+  SUCCESS
+  FAIL
+  ALL
+}
+
+type User {
+  firstname: String!
+  lastname: String
+  picture: String
+  text1: String
+  text2: String
+  text3: String
+  text4: String
+  text5: String @deprecated(reason: "Not used anymore")
+  text6: String
+  text7: String
+  text8: String
+}
+
+type Money {
+	cents: Int
+	currency: Currencies
+}
+
+type Query {
+  getCategories(parent_id: Int!): [Categories]
+}
+
+type Categories {
+  name: String!
+  description: String
+  thumbnail: String
+}

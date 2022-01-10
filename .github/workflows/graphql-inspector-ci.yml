@@ -1,5 +1,12 @@
 name: graphql-inspector-ci-actions
-on: [push]
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'myschema.graphql'
+
 jobs:
   notify-schema-changes:
     runs-on: ubuntu-latest

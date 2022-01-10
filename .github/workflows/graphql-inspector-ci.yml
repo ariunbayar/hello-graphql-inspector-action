@@ -8,6 +8,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
+      - name: Test git command
+        run: git branch
       - name: Install dependencies
         run: |
             npm install graphql@^15.0.0

@@ -167,5 +167,7 @@ const options = {
     slackHook: process.argv[2],
 }
 
+console.log(process.argv[2]);
+
 
 notifyChanges(options)

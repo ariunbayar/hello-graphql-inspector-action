@@ -10,6 +10,7 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
+          cache: 'npm'
       - name: Test git command
         run: git branch
       - name: Install dependencies
@@ -21,4 +22,4 @@ jobs:
             npm install @graphql-inspector/core@3.0.2
       - name: GraphQL Inspector
         run: |
-          node notify_schema_changes_to_slack.js
+          node notify_schema_changes_to_slack.js "${{ secrets.TEST_NON_SECRET }}"

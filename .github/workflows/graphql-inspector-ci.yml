@@ -10,4 +10,4 @@ jobs:
           node-version: '12'
       - name: GraphQL Inspector
         run: |
-          echo ${{ secrets.TEST_NON_SECRET }}
+          echo "${{ secrets.TEST_NON_SECRET }}"

@@ -8,6 +8,13 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
+      - name: Install dependencies
+        run: |
+            yarn global add graphql@^15.0.0
+            yarn global add @graphql-tools/load@^7.5.1
+            yarn global add @graphql-tools/graphql-file-loader@^7.3.3
+            yarn global add @graphql-tools/git-loader@7.1.2
+            yarn global add @graphql-inspector/core@3.0.2
       - name: GraphQL Inspector
         run: |
-          echo "${{ secrets.TEST_NON_SECRET }}"
+          node notify_schema_changes_to_slack.js

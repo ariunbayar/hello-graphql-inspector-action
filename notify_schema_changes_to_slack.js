@@ -146,14 +146,17 @@ async function notifySlack(webhook, repo, changes) {
 }
 
 
-async function notifyChanges({ oldSchemaGit, newSchema, repo, slackHook }) {
+async function notifyChanges({ oldSchema, newSchema, repo, slackHook }) {
 
-    const schema1 = loadSchemaSync(oldSchemaGit, {
-        loaders: [new GitLoader()]
+    console.log('oldSchema', oldSchema);
+    console.log('newSchema', newSchema);
+
+    const schema1 = loadSchemaSync(oldSchema, {
+        loaders: [new GraphQLFileLoader()]
     })
 
     const schema2 = loadSchemaSync(newSchema, {
-        loaders: [new GraphQLFileLoader()]
+        loaders: [new GitLoader()]
     })
 
     let changes = await diff(schema1, schema2)
@@ -169,7 +172,7 @@ async function notifyChanges({ oldSchemaGit, newSchema, repo, slackHook }) {
 
 
 const options = {
-    oldSchemaGit: process.env.NOTIFY_SCHEMA_OLDSCHEMA,
+    oldSchema: process.env.NOTIFY_SCHEMA_OLDSCHEMA,
     newSchema: process.env.NOTIFY_SCHEMA_NEWSCHEMA,
     repo: {
         url: process.env.NOTIFY_SCHEMA_REPO_URL,

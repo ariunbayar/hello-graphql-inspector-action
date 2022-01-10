@@ -112,6 +112,7 @@ async function notifySlack(webhook, repo, changes) {
     const compare = await getGitCompare(repo)
 
     const payload = JSON.stringify({
+        username: 'Marketplace graphql BOT',
         text: `Schema update on ${repo.main_branch} branch (<${compare.url}|\`${compare.commit}\`>)`,
         attachments: createAttachments(changes),
     })

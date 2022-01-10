@@ -164,10 +164,8 @@ const options = {
         url: 'https://github.com/ariunbayar/hello-graphql-inspector-action/',
         main_branch: 'origin/master',
     },
-    slackHook: process.argv[2],
+    slackHook: process.env.WEBHOOK,
 }
-
-console.log(process.env.WEBHOOK.slice(0, 10))
 
 
 notifyChanges(options)

@@ -25,5 +25,9 @@ jobs:
       - name: GraphQL Inspector
         env:
           WEBHOOK: ${{ secrets.TEST_NON_SECRET }}
+          NOTIFY_SCHEMA_OLDSCHEMA: 'git:origin/master:./myschema.graphql'
+          NOTIFY_SCHEMA_NEWSCHEMA: 'myschema.graphql'
+          NOTIFY_SCHEMA_REPO_URL: 'https://github.com/ariunbayar/hello-graphql-inspector-action/'
+          NOTIFY_SCHEMA_MAIN_BRANCH: 'origin/master'
         run: |
           node notify_schema_changes_to_slack.js

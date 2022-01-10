@@ -24,6 +24,6 @@ jobs:
 
       - name: GraphQL Inspector
         env:
-          TITLE: ${{ secrets.TEST_NON_SECRET }}
+          WEBHOOK: ${{ secrets.TEST_NON_SECRET }}
         run: |
-          node notify_schema_changes_to_slack.js "$TITLE"
+          node notify_schema_changes_to_slack.js

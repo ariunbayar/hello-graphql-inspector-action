@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  inspector:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: |
+      node notify_schema_changes_to_slack.js

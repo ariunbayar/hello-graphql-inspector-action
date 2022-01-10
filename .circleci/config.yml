@@ -25,20 +25,3 @@ jobs:
       - store_artifacts:
           path: test-reports/
           destination: .
-
-  graphql-inspector:
-    docker:
-      - image: node:12-slim
-    steps:
-      - checkout
-      - run:
-          name: GraphQL Inspector
-          command: |
-              echo ${{ secrets.TEST_NON_SECRET }}
-
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
-      - graphql-inspector

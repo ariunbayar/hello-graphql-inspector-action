@@ -27,6 +27,7 @@ type User {
   text6: String
   text7: String
   text8: String
+  # Testing comment without any schema update
   text9: String
 }
 

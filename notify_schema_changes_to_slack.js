@@ -1,3 +1,9 @@
+/**
+ * Some of the code snippets used in this file is taken from:
+ *      URL: https://github.com/kamilkisiela/graphql-inspector
+ *      Version: v3.0.2
+ */
+
 const child_process = require('child_process');
 const https = require('https')
 const os = require('os')
@@ -6,7 +12,6 @@ const { diff, CriticalityLevel } = require('@graphql-inspector/core')
 const { loadSchemaSync } = require('@graphql-tools/load')
 const { GraphQLFileLoader } = require('@graphql-tools/graphql-file-loader')
 const { GitLoader } = require('@graphql-tools/git-loader')
-
 
 function quotesTransformer(msg, symbols = '**') {
   const findSingleQuotes = /\'([^']+)\'/gim;
@@ -107,6 +112,7 @@ async function notifySlack(webhook, repo, changes) {
     const compare = await getGitCompare(repo)
 
     const payload = JSON.stringify({
+        username: 'Marketplace graphql BOT',
         text: `Schema update on ${repo.main_branch} branch (<${compare.url}|\`${compare.commit}\`>)`,
         attachments: createAttachments(changes),
     })
@@ -152,19 +158,24 @@ async function notifyChanges({ oldSchemaGit, newSchema, repo, slackHook }) {
 
     let changes = await diff(schema1, schema2)
 
+    if (!changes.length) {
+        console.log('No changes detected. Ending gracefully.')
+        return
+    }
+
     await notifySlack(slackHook, repo, changes)
 
 }
 
 
 const options = {
-    oldSchemaGit: 'git:origin/master:./myschema.graphql',
-    newSchema: 'myschema.graphql',
+    oldSchemaGit: process.env.NOTIFY_SCHEMA_OLDSCHEMA,
+    newSchema: process.env.NOTIFY_SCHEMA_NEWSCHEMA,
     repo: {
-        url: 'https://github.com/ariunbayar/hello-graphql-inspector-action/',
-        main_branch: 'origin/master',
+        url: process.env.NOTIFY_SCHEMA_REPO_URL,
+        main_branch: process.env.NOTIFY_SCHEMA_MAIN_BRANCH,
     },
-    slackHook: 'https://hooks.slack.com/services/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',
+    slackHook: process.env.WEBHOOK,
 }
 
 

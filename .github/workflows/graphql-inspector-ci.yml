@@ -1,17 +1,26 @@
 name: graphql-inspector-ci-actions
-on: [push]
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'myschema.graphql'
+
 jobs:
   notify-schema-changes:
     runs-on: ubuntu-latest
     steps:
+
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      - name: Test git command
-        run: git branch
+          cache: 'npm'
+
       - name: Install dependencies
         run: |
             npm install graphql@^15.0.0
@@ -19,6 +28,13 @@ jobs:
             npm install @graphql-tools/graphql-file-loader@^7.3.3
             npm install @graphql-tools/git-loader@7.1.2
             npm install @graphql-inspector/core@3.0.2
+
       - name: GraphQL Inspector
+        env:
+          WEBHOOK: ${{ secrets.TEST_NON_SECRET }}
+          NOTIFY_SCHEMA_OLDSCHEMA: 'git:origin/master:./myschema.graphql'
+          NOTIFY_SCHEMA_NEWSCHEMA: 'myschema.graphql'
+          NOTIFY_SCHEMA_REPO_URL: 'https://github.com/ariunbayar/hello-graphql-inspector-action/'
+          NOTIFY_SCHEMA_MAIN_BRANCH: 'origin/master'
         run: |
           node notify_schema_changes_to_slack.js

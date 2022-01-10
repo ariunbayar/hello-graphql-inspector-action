@@ -1,14 +1,13 @@
 name: graphql-inspector-ci-actions
 on: [push]
 jobs:
-  check-bats-version:
+  notify-schema-changes:
     runs-on: node:12-slim
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
           node-version: '12'
-      - run:
-          name: GraphQL Inspector
-          command: |
-              echo ${{ secrets.TEST_NON_SECRET }}
+      - name: GraphQL Inspector
+        run: |
+          echo ${{ secrets.TEST_NON_SECRET }}

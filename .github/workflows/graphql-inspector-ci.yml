@@ -36,5 +36,11 @@ jobs:
           NOTIFY_SCHEMA_NEWSCHEMA: git:origin/${{ github.ref_name }}:./myschema.graphql
           NOTIFY_SCHEMA_REPO_URL: 'https://github.com/ariunbayar/hello-graphql-inspector-action/'
           NOTIFY_SCHEMA_MAIN_BRANCH: 'origin/master'
+          conf1: ${{ github.base_ref }}
+          conf2: ${{ github.head_ref }}
+          conf3: ${{ github.ref }}
+          conf4: ${{ github.ref_name }}
+          conf5: ${{ github.ref_protected }}
+          conf6: ${{ github.ref_type }}
         run: |
           node notify_schema_changes_to_slack.js

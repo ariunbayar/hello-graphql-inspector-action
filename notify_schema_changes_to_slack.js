@@ -148,9 +148,6 @@ async function notifySlack(webhook, repo, changes) {
 
 async function notifyChanges({ oldSchema, newSchema, repo, slackHook }) {
 
-    console.log('oldSchema', oldSchema);
-    console.log('newSchema', newSchema);
-
     const schema1 = loadSchemaSync(oldSchema, {
         loaders: [new GraphQLFileLoader()]
     })
@@ -180,6 +177,14 @@ const options = {
     },
     slackHook: process.env.WEBHOOK,
 }
+
+
+console.log('conf1', process.env.conf1);
+console.log('conf2', process.env.conf2);
+console.log('conf3', process.env.conf3);
+console.log('conf4', process.env.conf4);
+console.log('conf5', process.env.conf5);
+console.log('conf6', process.env.conf6);
 
 
 notifyChanges(options)

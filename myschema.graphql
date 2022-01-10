@@ -30,6 +30,7 @@ type User {
   text9: String @deprecated(reason: "Not used anymore")
   text10: String
   text11: String
+  text12: String
 }
 
 type Money {

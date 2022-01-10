@@ -158,7 +158,7 @@ async function notifyChanges({ oldSchemaGit, newSchema, repo, slackHook }) {
 
 
 const options = {
-    oldSchemaGit: 'git:origin/master:./myschema.graphql',
+    oldSchemaGit: 'git:master:./myschema.graphql',
     newSchema: 'myschema.graphql',
     repo: {
         url: 'https://github.com/ariunbayar/hello-graphql-inspector-action/',

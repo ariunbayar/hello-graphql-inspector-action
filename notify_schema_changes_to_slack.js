@@ -162,7 +162,7 @@ const options = {
     newSchema: 'myschema.graphql',
     repo: {
         url: 'https://github.com/ariunbayar/hello-graphql-inspector-action/',
-        main_branch: 'master',
+        main_branch: 'origin/master',
     },
     slackHook: 'https://hooks.slack.com/services/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',
 }

@@ -1,9 +1,0 @@
-diff:
-  annotations: false
-  failOnBreaking: true
-
-notifications:
-  slack: https://hooks.slack.com/services/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
-
-branch: 'master'
-schema: 'myschema.graphql'

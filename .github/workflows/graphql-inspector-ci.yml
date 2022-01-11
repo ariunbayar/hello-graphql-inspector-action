@@ -42,5 +42,7 @@ jobs:
           conf4: ${{ github.ref_name }}
           conf5: ${{ github.ref_protected }}
           conf6: ${{ github.ref_type }}
+          conf7: ${{ github.sha }}
+
         run: |
           node notify_schema_changes_to_slack.js

@@ -29,7 +29,7 @@ type User {
   text8: String
   text9: String @deprecated(reason: "Not used anymore")
   text10: String @deprecated(reason: "Not used anymore")
-  text11: String
+  text11: String @deprecated(reason: "Not used anymore")
   text12: String
   text13: String
   text14: String

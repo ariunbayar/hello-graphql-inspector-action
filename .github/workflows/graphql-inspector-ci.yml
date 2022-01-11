@@ -36,6 +36,7 @@ jobs:
           GRAPHQL_SCHEMA_NEW: git:${{ github.sha }}:myschema.graphql
           PULL_REQUEST_URL: ${{ github.event.pull_request.html_url }}
           PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
+          PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
 
         run: |
           node notify_schema_changes_to_slack.js

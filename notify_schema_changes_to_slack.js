@@ -147,7 +147,7 @@ const options = {
     pull_request: {
         url: process.env.PULL_REQUEST_URL,
         title: process.env.PULL_REQUEST_TITLE,
-    }
+    },
     slackHook: process.env.WEBHOOK_SLACK_GRAPHQL,
 }
 

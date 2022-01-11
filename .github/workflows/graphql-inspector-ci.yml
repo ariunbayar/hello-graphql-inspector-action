@@ -34,7 +34,7 @@ jobs:
           WEBHOOK: ${{ secrets.TEST_NON_SECRET }}
           NOTIFY_SCHEMA_OLDSCHEMA: 'myschema.graphql'
           NOTIFY_SCHEMA_NEWSCHEMA: git:origin/${{ github.ref_name }}:./myschema.graphql
-          NOTIFY_SCHEMA_REPO_URL: 'https://github.com/ariunbayar/hello-graphql-inspector-action/'
+          NOTIFY_SCHEMA_REPO_URL: 'https://github.com/${{ GITHUB_REPOSITORY }}'
           NOTIFY_SCHEMA_MAIN_BRANCH: 'origin/master'
           conf1: ${{ github.base_ref }}
           conf2: ${{ github.head_ref }}

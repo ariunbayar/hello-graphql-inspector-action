@@ -1,14 +1,14 @@
 name: graphql-inspector-ci-actions
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types: [closed]
     paths:
       - 'myschema.graphql'
 
 jobs:
   notify-schema-changes:
+    if: github.event.pull_request.merged == 'true'
     runs-on: ubuntu-latest
     steps:
 

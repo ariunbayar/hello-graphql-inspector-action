@@ -172,20 +172,15 @@ const options = {
     oldSchema: process.env.NOTIFY_SCHEMA_OLDSCHEMA,
     newSchema: process.env.NOTIFY_SCHEMA_NEWSCHEMA,
     repo: {
-        url: process.env.NOTIFY_SCHEMA_REPO_URL,
+        url: process.env.GITHUB_SERVER_URL + '/' + process.env.GITHUB_REPOSITORY,
         main_branch: process.env.NOTIFY_SCHEMA_MAIN_BRANCH,
     },
     slackHook: process.env.WEBHOOK,
 }
 
-
-console.log('conf1', process.env.conf1);
-console.log('conf2', process.env.conf2);
-console.log('conf3', process.env.conf3);
-console.log('conf4', process.env.conf4);
-console.log('conf5', process.env.conf5);
-console.log('conf6', process.env.conf6);
-console.log('conf7', process.env.conf7);
+console.log('NOTIFY_SCHEMA_OLDSCHEMA',   process.env.NOTIFY_SCHEMA_OLDSCHEMA);
+console.log('NOTIFY_SCHEMA_NEWSCHEMA',   process.env.NOTIFY_SCHEMA_NEWSCHEMA);
+console.log('NOTIFY_SCHEMA_MAIN_BRANCH', process.env.NOTIFY_SCHEMA_MAIN_BRANCH);
 
 console.log('CI', process.env.CI);
 console.log('GITHUB_WORKFLOW', process.env.GITHUB_WORKFLOW);

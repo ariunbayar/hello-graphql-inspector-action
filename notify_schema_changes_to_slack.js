@@ -185,6 +185,7 @@ console.log('conf3', process.env.conf3);
 console.log('conf4', process.env.conf4);
 console.log('conf5', process.env.conf5);
 console.log('conf6', process.env.conf6);
+console.log('conf7', process.env.conf7);
 
 
 notifyChanges(options)

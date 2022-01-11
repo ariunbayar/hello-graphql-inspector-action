@@ -33,6 +33,7 @@ type User {
   text12: String
   text13: String
   text14: String
+  text15: String
 }
 
 type Money {

@@ -210,6 +210,7 @@ console.log('RUNNER_OS', process.env.RUNNER_OS);
 console.log('RUNNER_ARCH', process.env.RUNNER_ARCH);
 console.log('RUNNER_TEMP', process.env.RUNNER_TEMP);
 console.log('RUNNER_TOOL_CACHE', process.env.RUNNER_TOOL_CACHE);
+console.log('GITHUB_CONTEXT', process.env.GITHUB_CONTEXT);
 
 
 notifyChanges(options)

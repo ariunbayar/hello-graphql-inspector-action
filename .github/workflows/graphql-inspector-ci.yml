@@ -35,6 +35,6 @@ jobs:
           NOTIFY_SCHEMA_OLDSCHEMA: git:origin/${{ github.base_ref }}:./myschema.graphql
           NOTIFY_SCHEMA_NEWSCHEMA: myschema.graphql
           NOTIFY_SCHEMA_MAIN_BRANCH: origin/${{ github.base_ref }}
-
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           node notify_schema_changes_to_slack.js

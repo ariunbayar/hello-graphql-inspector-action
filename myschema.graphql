@@ -33,7 +33,7 @@ type User {
   text12: String @deprecated(reason: "Not used anymore")
   text13: String @deprecated(reason: "Not used anymore")
   text14: String @deprecated(reason: "Not used anymore")
-  text15: String
+  text15: String @deprecated(reason: "Not used anymore")
 }
 
 type Money {

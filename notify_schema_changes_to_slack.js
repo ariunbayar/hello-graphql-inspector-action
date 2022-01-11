@@ -13,6 +13,7 @@ const { loadSchemaSync } = require('@graphql-tools/load')
 const { GraphQLFileLoader } = require('@graphql-tools/graphql-file-loader')
 const { GitLoader } = require('@graphql-tools/git-loader')
 
+
 function quotesTransformer(msg, symbols = '**') {
   const findSingleQuotes = /\'([^']+)\'/gim;
   const findDoubleQuotes = /\"([^"]+)\"/gim;
@@ -79,41 +80,11 @@ function renderAttachments({ changes, title, color, }) {
 }
 
 
-async function getCommitId(ref) {
-    return await new Promise((resolve, reject) => {
-        child_process.execFile('git', ['rev-parse', ref], { encoding: 'utf-8', maxBuffer: 1024 * 1024 * 1024 }, (error, stdout) => {
-            if (error) {
-                reject(error)
-            } else {
-                resolve(stdout.trim().substr(0, 7))
-            }
-        })
-    })
-}
-
-
-async function getGitCompare(repo) {
-
-    const [ commit_from, commit_to ] = await Promise.all([
-        getCommitId(repo.main_branch),
-        getCommitId('HEAD'),
-    ])
-
-    return {
-        url: `${repo.url}/compare/${commit_from}...${commit_to}`,
-        commit: commit_to,
-    }
-
-}
-
-
-async function notifySlack(webhook, repo, changes) {
-
-    const compare = await getGitCompare(repo)
+async function notifySlack(webhook, pull_request, changes) {
 
     const payload = JSON.stringify({
         username: 'Marketplace graphql BOT',
-        text: `Schema update on ${repo.main_branch} branch (<${compare.url}|\`${compare.commit}\`>)`,
+        text: `Schema update on <${pull_request.url}|\`${pull_request.title}\`>`,
         attachments: createAttachments(changes),
     })
 
@@ -146,15 +117,17 @@ async function notifySlack(webhook, repo, changes) {
 }
 
 
-async function notifyChanges({ oldSchema, newSchema, repo, slackHook }) {
-
-    const schema1 = loadSchemaSync(oldSchema, {
+function loadSchema(schema) {
+    return loadSchemaSync(schema, {
         loaders: [new GitLoader()]
     })
+}
 
-    const schema2 = loadSchemaSync(newSchema, {
-        loaders: [new GraphQLFileLoader()]
-    })
+
+async function notifyChanges({ oldSchema, newSchema, pull_request, slackHook }) {
+
+    const schema1 = loadSchema(oldSchema)
+    const schema2 = loadSchema(newSchema)
 
     let changes = await diff(schema1, schema2)
 
@@ -163,54 +136,19 @@ async function notifyChanges({ oldSchema, newSchema, repo, slackHook }) {
         return
     }
 
-    await notifySlack(slackHook, repo, changes)
+    await notifySlack(slackHook, pull_request, changes)
 
 }
 
 
 const options = {
-    oldSchema: process.env.NOTIFY_SCHEMA_OLDSCHEMA,
-    newSchema: process.env.NOTIFY_SCHEMA_NEWSCHEMA,
-    repo: {
-        url: process.env.GITHUB_SERVER_URL + '/' + process.env.GITHUB_REPOSITORY,
-        main_branch: process.env.NOTIFY_SCHEMA_MAIN_BRANCH,
-    },
-    slackHook: process.env.WEBHOOK,
+    oldSchema: process.env.GRAPHQL_SCHEMA_OLD,
+    newSchema: process.env.GRAPHQL_SCHEMA_NEW,
+    pull_request: {
+        url: process.env.PULL_REQUEST_URL,
+        title: process.env.PULL_REQUEST_TITLE,
+    }
+    slackHook: process.env.WEBHOOK_SLACK_GRAPHQL,
 }
-
-console.log('NOTIFY_SCHEMA_OLDSCHEMA',   process.env.NOTIFY_SCHEMA_OLDSCHEMA);
-console.log('NOTIFY_SCHEMA_NEWSCHEMA',   process.env.NOTIFY_SCHEMA_NEWSCHEMA);
-console.log('NOTIFY_SCHEMA_MAIN_BRANCH', process.env.NOTIFY_SCHEMA_MAIN_BRANCH);
-
-console.log('CI', process.env.CI);
-console.log('GITHUB_WORKFLOW', process.env.GITHUB_WORKFLOW);
-console.log('GITHUB_RUN_ID', process.env.GITHUB_RUN_ID);
-console.log('GITHUB_RUN_NUMBER', process.env.GITHUB_RUN_NUMBER);
-console.log('GITHUB_JOB', process.env.GITHUB_JOB);
-console.log('GITHUB_ACTION', process.env.GITHUB_ACTION);
-console.log('GITHUB_ACTION_PATH', process.env.GITHUB_ACTION_PATH);
-console.log('GITHUB_ACTIONS', process.env.GITHUB_ACTIONS);
-console.log('GITHUB_ACTOR', process.env.GITHUB_ACTOR);
-console.log('GITHUB_REPOSITORY', process.env.GITHUB_REPOSITORY);
-console.log('GITHUB_EVENT_NAME', process.env.GITHUB_EVENT_NAME);
-console.log('GITHUB_EVENT_PATH', process.env.GITHUB_EVENT_PATH);
-console.log('GITHUB_WORKSPACE', process.env.GITHUB_WORKSPACE);
-console.log('GITHUB_SHA', process.env.GITHUB_SHA);
-console.log('GITHUB_REF', process.env.GITHUB_REF);
-console.log('GITHUB_REF_NAME', process.env.GITHUB_REF_NAME);
-console.log('GITHUB_REF_PROTECTED', process.env.GITHUB_REF_PROTECTED);
-console.log('GITHUB_REF_TYPE', process.env.GITHUB_REF_TYPE);
-console.log('GITHUB_HEAD_REF', process.env.GITHUB_HEAD_REF);
-console.log('GITHUB_BASE_REF', process.env.GITHUB_BASE_REF);
-console.log('GITHUB_SERVER_URL', process.env.GITHUB_SERVER_URL);
-console.log('GITHUB_API_URL', process.env.GITHUB_API_URL);
-console.log('GITHUB_GRAPHQL_URL', process.env.GITHUB_GRAPHQL_URL);
-console.log('RUNNER_NAME', process.env.RUNNER_NAME);
-console.log('RUNNER_OS', process.env.RUNNER_OS);
-console.log('RUNNER_ARCH', process.env.RUNNER_ARCH);
-console.log('RUNNER_TEMP', process.env.RUNNER_TEMP);
-console.log('RUNNER_TOOL_CACHE', process.env.RUNNER_TOOL_CACHE);
-console.log('GITHUB_CONTEXT', process.env.GITHUB_CONTEXT);
-
 
 notifyChanges(options)

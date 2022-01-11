@@ -31,10 +31,11 @@ jobs:
 
       - name: GraphQL Inspector
         env:
-          WEBHOOK: ${{ secrets.TEST_NON_SECRET }}
-          NOTIFY_SCHEMA_OLDSCHEMA: git:origin/${{ github.base_ref }}:./myschema.graphql
-          NOTIFY_SCHEMA_NEWSCHEMA: myschema.graphql
-          NOTIFY_SCHEMA_MAIN_BRANCH: origin/${{ github.base_ref }}
-          GITHUB_CONTEXT: ${{ toJson(github) }}
+          WEBHOOK_SLACK_GRAPHQL : ${{ secrets.WEBHOOK_SLACK_GRAPHQL }}
+          GRAPHQL_SCHEMA_OLD: git:${{ github.event.pull_request.base.sha }}:myschema.graphql
+          GRAPHQL_SCHEMA_NEW: git:${{ github.sha }}:myschema.graphql
+          PULL_REQUEST_URL: ${{ github.event.pull_request.html_url }}
+          PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
+
         run: |
           node notify_schema_changes_to_slack.js

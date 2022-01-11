@@ -27,15 +27,9 @@ type User {
   text6: String
   text7: String
   text8: String
-  text9: String @deprecated(reason: "Not used anymore")
-  text10: String @deprecated(reason: "Not used anymore")
-  text11: String @deprecated(reason: "Not used anymore")
-  text12: String @deprecated(reason: "Not used anymore")
-  text13: String @deprecated(reason: "Not used anymore")
-  text14: String @deprecated(reason: "Not used anymore")
-  text15: String @deprecated(reason: "Not used anymore")
   text16: String
-  text17: String
+  text17: Int
+  text18: String
 }
 
 type Money {

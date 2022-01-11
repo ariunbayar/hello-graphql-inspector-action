@@ -34,8 +34,8 @@ type User {
 }
 
 type Money {
-	cents: Int
-	currency: Currencies
+  cents: Int
+  currency: Currencies
 }
 
 type Query {

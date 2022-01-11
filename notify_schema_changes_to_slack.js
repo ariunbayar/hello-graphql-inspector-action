@@ -84,7 +84,7 @@ async function notifySlack(webhook, pull_request, changes) {
 
     const payload = JSON.stringify({
         username: 'Marketplace graphql BOT',
-        text: `Schema update on <${pull_request.url}|\`${pull_request.title} #${pull_request.title}\`>`,
+        text: `Schema update on <${pull_request.url}|\`${pull_request.title} #${pull_request.number}\`>`,
         attachments: createAttachments(changes),
     })
 

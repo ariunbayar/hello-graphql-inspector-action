@@ -30,6 +30,7 @@ type User {
   text16: String
   text17: Int
   text18: String
+  field19: Money
 }
 
 type Money {

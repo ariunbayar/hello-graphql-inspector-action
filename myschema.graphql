@@ -61,6 +61,7 @@ type Query {
 
 type Categories {
   name: String!
-  description: String
-  thumbnail: String
+  thumbnail: AWSURL!
+  searchFilters: AWSJSON!
+  createdAt: AWSDate
 }

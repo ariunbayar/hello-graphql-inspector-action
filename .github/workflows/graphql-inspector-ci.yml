@@ -21,7 +21,8 @@ jobs:
           #node-version: '12'
           #cache: 'npm'
 
-      - name: Cache node modules
+      - id: cache-node-modules
+        name: Cache node modules
         uses: actions/cache@v2
         with:
           # npm cache files are stored in `~/.npm` on Linux/macOS
@@ -29,7 +30,7 @@ jobs:
           key: build-cache-node-modules-${{ hashFiles('.github/workflows/graphql-inspector-ci.yml') }}
 
       - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != true
+        if: ${{ steps.cache.outputs.cache-hit != true }}
         run: |
             npm install graphql@^15.0.0
             npm install @graphql-tools/load@^7.5.1

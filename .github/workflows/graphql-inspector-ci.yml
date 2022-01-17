@@ -49,4 +49,5 @@ jobs:
           debug: ${{ toJSON(steps.cache) }}
 
         run: |
+          ls .
           node notify_schema_changes_to_slack.js

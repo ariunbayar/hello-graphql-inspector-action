@@ -8,7 +8,9 @@ const child_process = require('child_process');
 const https = require('https')
 const os = require('os')
 
+
 const { diff, CriticalityLevel } = require('@graphql-inspector/core')
+const { useLoaders } = require('@graphql-inspector/loaders')
 const { loadSchemaSync } = require('@graphql-tools/load')
 const { GraphQLFileLoader } = require('@graphql-tools/graphql-file-loader')
 const { GitLoader } = require('@graphql-tools/git-loader')
@@ -117,17 +119,28 @@ async function notifySlack(webhook, pull_request, changes) {
 }
 
 
-function loadSchema(schema) {
-    return loadSchemaSync(schema, {
-        loaders: [new GitLoader()]
-    })
+async function loadSchema(schemaPointer) {
+
+    const loaders = useLoaders({loaders: ['git', 'graphql']});
+
+    return await loaders.loadSchema(
+        schemaPointer,
+        {
+            headers: {},
+            token: '',
+            method: '',
+        },
+        true,
+        true,
+    )
+
 }
 
 
 async function notifyChanges({ oldSchema, newSchema, pull_request, slackHook }) {
 
-    const schema1 = loadSchema(oldSchema)
-    const schema2 = loadSchema(newSchema)
+    const schema1 = await loadSchema(oldSchema)
+    const schema2 = await loadSchema(newSchema)
 
     let changes = await diff(schema1, schema2)
 

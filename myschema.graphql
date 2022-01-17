@@ -33,6 +33,7 @@ type User {
   field20: SomeStatus
   field21: SomeStatus
   field22: SomeStatus
+  field23: SomeStatus
 }
 
 type Money {

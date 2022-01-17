@@ -50,4 +50,5 @@ jobs:
 
         run: |
           ls .
+          cat manifest.txt
           node notify_schema_changes_to_slack.js

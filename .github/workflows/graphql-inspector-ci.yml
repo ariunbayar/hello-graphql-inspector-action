@@ -46,9 +46,6 @@ jobs:
           PULL_REQUEST_URL: ${{ github.event.pull_request.html_url }}
           PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
           PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
-          debug: ${{ toJSON(steps.cache) }}
 
         run: |
-          ls .
-          cat manifest.txt
           node notify_schema_changes_to_slack.js

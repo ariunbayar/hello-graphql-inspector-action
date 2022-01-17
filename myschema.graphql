@@ -1,71 +1,247 @@
-enum Currencies {
-	USD
-	EUR
-	GBP
-	INR
-	TRY
-}
-
-
-enum SomeStatus {
-  ON_HOLD
-  PROGRESS
-  SUCCESS
-  FAIL
-  ALL
-}
-
-type User {
-  firstname: String!
-  lastname: String
-  picture: String
-  text1: String
-  text2: String
-  text3: String
-  text4: String
-  text6: String
-  text7: String
-  text8: String
-  text16: String
-  text17: Int
-  text18: String
-  field19: Money
-  field20: SomeStatus
-  field21: SomeStatus
-  field22: SomeStatus
-  field23: SomeStatus
-  field24: SomeStatus
-  field25: SomeStatus
-  field26: SomeStatus
-  field27: SomeStatus
-  field28: SomeStatus
-  field29: SomeStatus
-  field30: SomeStatus
-  field31: SomeStatus
-  field32: SomeStatus
-  field33: SomeStatus
-  field34: SomeStatus
-  field35: SomeStatus
-  field36: SomeStatus
-}
-
-type Money {
-  cents: Int
-  cents1: Int
-  cents2: Int
-  cents3: Int
-  cents4: Int
-  currency: Currencies
-}
-
-type Query {
-  getCategories(parent_id: Int!): [Categories]
-  getCategories1(parent_id: Int!): [Categories]
-}
-
 type Categories {
   name: String!
   thumbnail: AWSURL!
   searchFilters: AWSJSON!
   createdAt: AWSDate
+}
+type CategoryType {
+	id: ID!
+	displayName: String!
+	description: String
+	thumbnail: AWSURL!
+	searchFilters: AWSJSON!
+	type: String!
+}
+
+input CreateCategoryInput {
+	id: ID!
+	displayName: String!
+	description: String
+	thumbnail: AWSURL!
+	searchFilters: AWSJSON!
+	type: String!
+}
+
+enum Currencies {
+	USD
+}
+
+enum DayOfWeek {
+	MONDAY
+	TUESDAY
+	WEDNESDAY
+	THURSDAY
+	FRIDAY
+	SATURDAY
+	SUNDAY
+}
+
+type Dealer {
+	id: ID
+	address1: String
+	address2: String
+	city: String
+	country: String
+	latitude: Float
+	longitude: Float
+	name: String
+	phoneNumber: String
+	state: String
+	timezone: String
+	zip: String
+}
+
+input DeleteCategoryInput {
+	id: ID!
+}
+
+type FacetType {
+	id: ID!
+	filters: AWSJSON!
+	imageUrl: AWSURL!
+	title: String!
+	urlPath: String!
+}
+
+input FavoritesInput {
+	accountNumber: String!
+	vehicleId: String!
+}
+
+type FavoritesReturnType {
+	favorites: [FavoritesType]!
+}
+
+type FavoritesType {
+	accountNumber: String!
+	vehicleId: String!
+	createdAt: Int
+	updatedAt: Int
+	available: Boolean
+	active: Boolean
+}
+
+type FilterGroupType {
+	id: ID!
+	icon: String
+	label: String!
+	type: String!
+	subsections: AWSJSON!
+	subsectionType: String!
+}
+
+input FilterInput {
+	id: ID!
+	config: AWSJSON!
+}
+
+type FilterType {
+	id: ID!
+	config: AWSJSON!
+}
+
+input InsightsInput {
+	model: String!
+	year: Int
+	vehicleStatus: [VehicleStatus]
+}
+
+type InsightsType {
+	avgPrice: Float
+	avgMileage: Float
+	tags: [String]
+}
+
+input LocationInput {
+	lat: Float!
+	lon: Float!
+	maxDistanceMiles: Int = 1000
+}
+
+type Money {
+	cents: Int
+	currency: Currencies
+}
+
+type Mutation {
+	addFavorites(input: FavoritesInput!): Boolean
+	removeFavorites(input: FavoritesInput!): Boolean
+	createCategory(input: CreateCategoryInput!): CategoryType
+	updateCategory(input: UpdateCategoryInput!): CategoryType
+	deleteCategory(input: DeleteCategoryInput!): CategoryType
+}
+
+type Query {
+	autoComplete(queryString: String): AWSJSON
+	filters: [FilterType!]
+	filterGroups: [FilterGroupType!]
+	getCategories: [CategoryType!]
+	getFavorites(accountNumber: String!, vehicleIds: [String]): FavoritesReturnType
+	insights(parameters: InsightsInput!): InsightsType
+	maxVehiclePrice(term: Int!, monthlyPayment: Int!, downPayment: Int): VehiclePriceMax!
+	searchVehicles(options: VehicleSearchInput): VehicleSearchOutput
+	searchVehiclesCount(options: VehicleSearchInput): VehiclesCount!
+	getVehicleRecommendations(id: ID!, locationInput: LocationInput!, customerZipcode: String!): [VehicleType!]
+	getFacets(urlPath: String!, categoryType: String!): [FacetType!]
+}
+
+type Tag {
+	name: String
+	group: String
+}
+
+input UpdateCategoryInput {
+	id: ID!
+	displayName: String!
+	description: String
+	thumbnail: AWSURL!
+	searchFilters: AWSJSON!
+	type: String!
+}
+
+type VehicleImages {
+	dealerSourceUrl: [String]
+	fairUrl: [String]
+}
+
+input VehicleSearchInput {
+	filters: [AWSJSON]
+	textQuery: String
+	page: Int
+	perPage: Int
+	sortBy: String
+	latitude: Float
+	longitude: Float
+	vehicleStatus: [VehicleStatus]
+}
+
+type VehicleSearchOutput {
+	vehicles: [VehicleType]
+	pageCount: Int!
+	currentPage: Int!
+	filteredCount: Int!
+}
+
+enum VehicleStatus {
+	INELIGIBLE
+	LISTED
+	MANUALLY_EXCLUDED
+	ON_HOLD
+	ON_HOLD_BY_DEALER
+	REMOVED
+	STATUS_TYPE_UNKNOWN
+}
+
+type VehicleStatusType {
+	status: VehicleStatus
+	statusCreatedAt: AWSDate
+	statusReason: String
+}
+
+type VehicleTopFeature {
+	imageUrl: String!
+	name: String!
+}
+
+type VehicleType {
+	id: ID!
+	bodyType: String
+	chromeStyleId: String
+	cpoFlag: Boolean
+	dateInStock: String
+	dealer: Dealer
+	deliveryAvailable: Boolean
+	description: String
+	doorsCount: Int
+	drivetrain: String
+	engine: String
+	exteriorColor: String
+	features: [String]
+	fuelType: String
+	historyAttributes: [String]
+	historyReportUrls: [String]
+	images: VehicleImages
+	interiorColor: String
+	make: String
+	model: String
+	monthlyEstimate: Money
+	mpgAvg: Float
+	mpgCity: Float
+	mpgHighway: Float
+	odometer: Int
+	tags: [Tag]
+	transmission: String
+	trim: String
+	vehiclePrice: Money
+	vehicleStatus: VehicleStatusType
+	vin: String
+	year: Int
+}
+
+type VehiclesCount {
+	filteredCount: Int!
+}
+
+type VehiclePriceMax {
+	vehiclePrice: Money!
 }

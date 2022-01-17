@@ -27,9 +27,9 @@ jobs:
           # npm cache files are stored in `~/.npm` on Linux/macOS
           path: ~/.npm
           key: build-cache-node-modules-${{ hashFiles('.github/workflows/graphql-inspector-ci.yml') }}
-          restore-keys: build-cache-node-modules-
 
       - name: Install dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
             npm install graphql@^15.0.0
             npm install @graphql-tools/load@^7.5.1

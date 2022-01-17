@@ -31,6 +31,7 @@ type User {
   text18: String
   field19: Money
   field20: SomeStatus
+  field21: SomeStatus
 }
 
 type Money {

@@ -37,6 +37,7 @@ jobs:
             npm install @graphql-tools/graphql-file-loader@^7.3.3
             npm install @graphql-tools/git-loader@7.1.2
             npm install @graphql-inspector/core@3.0.2
+            npm install @graphql-inspector/loaders@3.0.2
 
       - name: GraphQL Inspector
         env:

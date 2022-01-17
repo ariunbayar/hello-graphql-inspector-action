@@ -52,6 +52,7 @@ type User {
 type Money {
   cents: Int
   cents1: Int
+  cents2: Int
   currency: Currencies
 }
 

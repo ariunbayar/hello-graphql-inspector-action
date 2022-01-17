@@ -54,6 +54,7 @@ type Money {
   cents1: Int
   cents2: Int
   cents3: Int
+  cents4: Int
   currency: Currencies
 }
 

@@ -21,7 +21,7 @@ jobs:
           #node-version: '12'
           #cache: 'npm'
 
-      - id: cache-node-modules
+      - id: cache
         name: Cache node modules
         uses: actions/cache@v2
         with:
@@ -30,7 +30,7 @@ jobs:
           key: build-cache-node-modules-${{ hashFiles('.github/workflows/graphql-inspector-ci.yml') }}
 
       - name: Install dependencies
-        if: ${{ steps.cache.outputs.cache-hit != true }}
+        if: steps.cache.outputs.cache-hit != 'true'
         run: |
             npm install graphql@^15.0.0
             npm install @graphql-tools/load@^7.5.1
@@ -46,7 +46,7 @@ jobs:
           PULL_REQUEST_URL: ${{ github.event.pull_request.html_url }}
           PULL_REQUEST_TITLE: ${{ github.event.pull_request.title }}
           PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
-          debug: ${{ toJSON(steps) }}
+          debug: ${{ toJSON(steps.cache) }}
 
         run: |
           node notify_schema_changes_to_slack.js

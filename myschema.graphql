@@ -40,6 +40,7 @@ type User {
   field27: SomeStatus
   field28: SomeStatus
   field29: SomeStatus
+  field30: SomeStatus
 }
 
 type Money {

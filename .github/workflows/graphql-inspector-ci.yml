@@ -34,4 +34,5 @@ jobs:
           PULL_REQUEST_NUMBER: ${{ github.event.pull_request.number }}
 
         run: |
+          ls
           node notify_schema_changes_to_slack.js

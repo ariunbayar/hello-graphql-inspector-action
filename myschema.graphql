@@ -1,6 +1,7 @@
 type Categories {
   name: String!
   name1: String!
+  name2: String!
   thumbnail: AWSURL!
   searchFilters: AWSJSON!
   createdAt: AWSDate
